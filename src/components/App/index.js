@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "components/Header";
 import TableComponent from "components/Table";
 import PaginationComponent from "components/Pagination";
+import DateFilter from "components/DateFilter";
 import Api from "api";
 
 import "./App.scss";
@@ -38,6 +39,9 @@ function App() {
       <Header />
       <div className="container">
         <div className="m-5">
+          <div className="d-flex justify-content-between">
+            <DateFilter />
+          </div>
           <TableComponent tableData={tableData} />
           <PaginationComponent
             activePage={activePage}
