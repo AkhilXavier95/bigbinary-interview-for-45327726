@@ -3,14 +3,24 @@ import React, { useEffect, useState } from "react";
 import Header from "components/Header";
 import TableComponent from "components/Table";
 import PaginationComponent from "components/Pagination";
+import FilterComponent from "components/FilterComponent";
+
 import Api from "api";
 
 import "./App.scss";
+
+const filterOptions = [
+  "All Launches",
+  "Upcoming Launches",
+  "Successful Launches",
+  "Failed Launches",
+];
 
 function App() {
   const [tableData, setTableData] = useState([]);
   const [tableDataCount, setTableDataCount] = useState(0);
   const [activePage, setActivePage] = useState(1);
+  const [selected, setSelected] = useState(filterOptions[0]);
 
   useEffect(() => {
     getLaunchData();
@@ -38,6 +48,13 @@ function App() {
       <Header />
       <div className="container">
         <div className="m-5">
+          <div className="d-flex justify-content-end align-items-center">
+            <FilterComponent
+              options={filterOptions}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          </div>
           <TableComponent tableData={tableData} />
           <PaginationComponent
             activePage={activePage}
