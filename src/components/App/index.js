@@ -4,7 +4,9 @@ import Header from "components/Header";
 import TableComponent from "components/Table";
 import PaginationComponent from "components/Pagination";
 import DateFilter from "components/DateFilter";
+import FilterComponent from "components/FilterComponent";
 import Api from "api";
+import { getPath, filterOptions } from "utils/helper";
 
 import "./App.scss";
 
@@ -12,17 +14,23 @@ function App() {
   const [tableData, setTableData] = useState([]);
   const [tableDataCount, setTableDataCount] = useState(0);
   const [activePage, setActivePage] = useState(1);
+  const [selected, setSelected] = useState(filterOptions[0]);
 
   useEffect(() => {
+    setActivePage(1);
     getLaunchData();
-  }, []);
+  }, [selected]);
 
   const getLaunchData = async (offSet = 0) => {
+    const path = getPath(selected.value);
+    const res = await Api().get(
+      `/launches${path ? path : "?"}limit=12&offset=${offSet}`
+    );
     const {
       data,
       status,
       headers: { [`spacex-api-count`]: count },
-    } = await Api().get(`/launches?limit=12&offset=${offSet}`);
+    } = res;
     if (status === 200) {
       setTableData(data);
       setTableDataCount(count);
@@ -39,8 +47,13 @@ function App() {
       <Header />
       <div className="container">
         <div className="m-5">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-end align-items-center">
             <DateFilter />
+            <FilterComponent
+              options={filterOptions}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </div>
           <TableComponent tableData={tableData} />
           <PaginationComponent
