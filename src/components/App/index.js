@@ -47,7 +47,7 @@ function App() {
       <Header />
       <div className="container">
         <div className="m-5">
-          <div className="d-flex justify-content-end align-items-center">
+          <div className="d-flex justify-content-between align-items-center mr-1 ml-1">
             <DateFilter />
             <FilterComponent
               options={filterOptions}

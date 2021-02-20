@@ -20,6 +20,18 @@ const defaultRanges = [
 const Wrapper = styled.div`
   .custom-range-picker {
     border-right: 1px solid #e4e4e7;
+    mi-height: 250px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0px 16px;
+  }
+
+  li {
+    padding: 7px 0px;
+    cursor: pointer;
   }
 
   & .react-datepicker {
@@ -38,7 +50,7 @@ const Wrapper = styled.div`
   }
 
   & .react-datepicker__month-container {
-    margin: 0px 5px;
+    margin: 0px 20px;
   }
 
   & .react-datepicker__day--keyboard-selected {
@@ -46,8 +58,10 @@ const Wrapper = styled.div`
     color: #000;
   }
 
-  &. react-datepicker__day--in-selecting {
-    background: red;
+  & .react-datepicker__day--in-selecting-range,
+  & .react-datepicker__day--in-range {
+    background: #e9ecef;
+    color: black;
   }
 `;
 
@@ -57,25 +71,14 @@ const DateFilter = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
+    if (end) {
+      setShowModal(false);
+      setSelected("Custom");
+    }
   };
 
   const modalBody = () => (
@@ -84,7 +87,15 @@ const DateFilter = () => {
         <div className="mr-4 pr-4 custom-range-picker">
           <ul>
             {defaultRanges.map((el) => (
-              <li key={el}>{el}</li>
+              <li
+                key={el}
+                onClick={() => {
+                  setSelected(el);
+                  setShowModal(false);
+                }}
+              >
+                {el}
+              </li>
             ))}
           </ul>
         </div>
