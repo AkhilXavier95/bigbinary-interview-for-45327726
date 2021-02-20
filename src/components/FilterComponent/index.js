@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import useOutsideClick from "helper/useOutsideClick";
+import useOutsideClick from "hooks/useOutsideClick";
 import Filter from "assets/filter.png";
 import arrow from "assets/arrow.png";
 
@@ -9,9 +9,15 @@ import "./Filter.scss";
 const FilterComponent = ({ options, selected, setSelected }) => {
   const ref = useRef();
   const [showOptions, setShowOptions] = useState(false);
+
   useOutsideClick(ref, () => {
     setShowOptions(false);
   });
+
+  const selectFilter = (item) => {
+    setSelected(item);
+    setShowOptions(false);
+  };
 
   return (
     <div className="d-flex align-items-center filter-container mb-2">
@@ -23,7 +29,7 @@ const FilterComponent = ({ options, selected, setSelected }) => {
         }}
       >
         <img className="mr-2" src={Filter} alt="" />
-        <div className="mr-3 label">{selected}</div>
+        <div className="mr-3 label">{selected.label}</div>
         <img src={arrow} alt="" />
       </div>
       {showOptions && (
@@ -32,12 +38,9 @@ const FilterComponent = ({ options, selected, setSelected }) => {
             <span
               className={`${el === selected && "selected"}`}
               value={el}
-              onClick={() => {
-                setSelected(el);
-                setShowOptions(false);
-              }}
+              onClick={() => selectFilter(el)}
             >
-              {el}
+              {el.label}
             </span>
           ))}
         </div>

@@ -4,17 +4,10 @@ import Header from "components/Header";
 import TableComponent from "components/Table";
 import PaginationComponent from "components/Pagination";
 import FilterComponent from "components/FilterComponent";
-
 import Api from "api";
+import { getPath, filterOptions } from "utils/helper";
 
 import "./App.scss";
-
-const filterOptions = [
-  "All Launches",
-  "Upcoming Launches",
-  "Successful Launches",
-  "Failed Launches",
-];
 
 function App() {
   const [tableData, setTableData] = useState([]);
@@ -23,15 +16,20 @@ function App() {
   const [selected, setSelected] = useState(filterOptions[0]);
 
   useEffect(() => {
+    setActivePage(1);
     getLaunchData();
-  }, []);
+  }, [selected]);
 
   const getLaunchData = async (offSet = 0) => {
+    const path = getPath(selected.value);
+    const res = await Api().get(
+      `/launches${path ? path : "?"}limit=12&offset=${offSet}`
+    );
     const {
       data,
       status,
       headers: { [`spacex-api-count`]: count },
-    } = await Api().get(`/launches?limit=12&offset=${offSet}`);
+    } = res;
     if (status === 200) {
       setTableData(data);
       setTableDataCount(count);
