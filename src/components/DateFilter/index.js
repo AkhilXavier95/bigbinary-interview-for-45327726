@@ -5,22 +5,16 @@ import styled from "styled-components";
 import ModalComponent from "components/Modal";
 import arrow from "assets/arrow.png";
 import calendar from "assets/calendar.png";
+import { defaultRanges } from "utils/helper";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const defaultRanges = [
-  "Past week",
-  "Past month",
-  "Past 3 months",
-  "Past 6 months",
-  "Past year",
-  "Past 2 years",
-];
-
 const Wrapper = styled.div`
+  .custom-date-picker {
+    mi-height: 270px;
+  }
   .custom-range-picker {
     border-right: 1px solid #e4e4e7;
-    mi-height: 250px;
   }
 
   ul {
@@ -65,12 +59,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const DateFilter = () => {
-  const [selected, setSelected] = useState("Last 6 Months");
+const DateFilter = ({ selected, setSelected }) => {
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-
+  console.log({ selected });
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -88,13 +81,13 @@ const DateFilter = () => {
           <ul>
             {defaultRanges.map((el) => (
               <li
-                key={el}
+                key={el.label}
                 onClick={() => {
                   setSelected(el);
                   setShowModal(false);
                 }}
               >
-                {el}
+                {el.label}
               </li>
             ))}
           </ul>
@@ -118,7 +111,7 @@ const DateFilter = () => {
         onClick={() => setShowModal(true)}
       >
         <img className="mr-2 " src={calendar} alt=""></img>
-        <span className="mr-2 font-weight-bold">{selected}</span>
+        <span className="mr-2 font-weight-bold">{selected.label}</span>
         <img src={arrow} alt=""></img>
       </div>
       <ModalComponent

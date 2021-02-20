@@ -1,3 +1,14 @@
+import startOfWeek from "date-fns/startOfWeek";
+import endOfWeek from "date-fns/endOfWeek";
+import startOfMonth from "date-fns/startOfMonth";
+import endOfMonth from "date-fns/endOfMonth";
+import startOfYear from "date-fns/startOfYear";
+import endOfYear from "date-fns/endOfYear";
+import subMonths from "date-fns/subMonths";
+import subWeeks from "date-fns/subWeeks";
+import subYears from "date-fns/subYears";
+import format from "date-fns/format";
+
 export const filterOptions = [
   { label: "All Launches", value: "" },
   { label: "Upcoming Launches", value: "upcoming" },
@@ -5,30 +16,74 @@ export const filterOptions = [
   { label: "Failed Launches", value: "launchFailed" },
 ];
 
-export const getPath = (value) => {
+export const getPath = (value, date) => {
+  let path = "";
   switch (value) {
     case "upcoming":
-      return "/upcoming?";
+      path = "/upcoming?";
+      break;
     case "launchSuccess":
-      return "?launch_success=true&";
+      path = "?launch_success=true&";
+      break;
     case "launchFailed":
-      return "?launch_success=false&";
+      path = "?launch_success=false&";
+      break;
     default:
-      return null;
+      path = "";
+      break;
   }
+  return `${path ? path : "?"}start=${format(
+    date[0],
+    "yyyy-MM-dd"
+  )}&end=${format(date[1], "yyyy-MM-dd")}`;
 };
 
-export const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+export const defaultRanges = [
+  {
+    label: "Past week",
+    value: [
+      startOfWeek(subWeeks(new Date(), 1)),
+      endOfWeek(subWeeks(new Date(), 1)),
+    ],
+  },
+
+  {
+    label: "Past month",
+    value: [
+      startOfMonth(subMonths(new Date(), 1)),
+      endOfMonth(subMonths(new Date(), 1)),
+    ],
+  },
+
+  {
+    label: "Past 3 months",
+    value: [
+      startOfMonth(subMonths(new Date(), 4)),
+      endOfMonth(subMonths(new Date(), 1)),
+    ],
+  },
+
+  {
+    label: "Past 6 months",
+    value: [
+      startOfMonth(subMonths(new Date(), 7)),
+      endOfMonth(subMonths(new Date(), 1)),
+    ],
+  },
+
+  {
+    label: "Past year",
+    value: [
+      startOfYear(subYears(new Date(), 1)),
+      endOfYear(subYears(new Date(), 1)),
+    ],
+  },
+
+  {
+    label: "Past 2 years",
+    value: [
+      startOfYear(subYears(new Date(), 3)),
+      endOfYear(subYears(new Date(), 1)),
+    ],
+  },
 ];
