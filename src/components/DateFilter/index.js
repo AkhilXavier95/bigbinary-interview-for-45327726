@@ -63,17 +63,15 @@ const DateFilter = ({ selected, setSelected }) => {
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
-  console.log({ selected });
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
     if (end) {
       setShowModal(false);
-      setSelected("Custom");
+      setSelected({ label: "Custom Dates", value: [start, end] });
     }
   };
-
   const modalBody = () => (
     <Wrapper>
       <div className="d-flex m-2 custom-date-picker">
