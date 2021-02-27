@@ -39,3 +39,60 @@ import Button from "components/Button";
 ```
 
 ## Components
+
+### DateFilter
+
+Date filter component takes in default Ranges , selected filter value, and a function to set the selected value as props
+
+```js
+import DateFilter from "components/DateFilter";
+
+<DateFilter
+  selected={selectedDate}
+  setSelected={onSelectDateFilter}
+  defaultRanges={defaultRanges}
+/>;
+```
+
+### DateFilter
+
+Date filter component takes in options to select from , selected filter value, and a function to set the selected value as props
+
+```js
+import FilterComponent from "components/FilterComponent";
+
+<FilterComponent
+  options={filterOptions}
+  selected={selectedFilter}
+  setSelected={onSelectFilter}
+/>;
+```
+
+### LoadingComponent
+
+```js
+import LoadingComponent from "components/LoadingComponent";
+
+<LoadingComponent />;
+```
+
+### LoadingComponent
+
+```js
+import PaginationComponent from "components/PaginationComponent";
+
+<PaginationComponent
+  activePage={activePage}
+  countPerPage={12}
+  totalCount={totalCount}
+  onChange={onPageChange}
+/>;
+```
+
+### TableComponent
+
+```js
+import TableComponent from "components/TableComponent";
+
+<TableComponent tableData={tableData} loading={tableLoading} />;
+```
