@@ -87,3 +87,25 @@ export const defaultRanges = [
     ],
   },
 ];
+
+export const getValuesFromUrl = (url, params, filter, dateFilter, offset) => {
+  if (url === "/") {
+    return {
+      filter,
+      dateFilter,
+      pageOffset: offset,
+    };
+  }
+  return {
+    filter: params.filter,
+    dateFilter: [new Date(params.startDate), new Date(params.endDate)],
+    pageOffset: params.page,
+  };
+};
+
+export const getUrl = ({ pageNumber, filter, date }) => {
+  return `/${filter}/${date.label.replace(/\s/g, "-")}/${format(
+    date.value[0],
+    "yyyy-MM-dd"
+  )}/${format(date.value[1], "yyyy-MM-dd")}/${pageNumber}`;
+};

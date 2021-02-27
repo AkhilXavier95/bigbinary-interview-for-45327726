@@ -2,9 +2,9 @@
   border: 1px solid #e4e4e7;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
+  margin-bottom: 1rem;
   .table-header {
     background: #f4f5f7;
-
     th {
       font-family: inter;
       font-weight: 500;
@@ -19,7 +19,7 @@
       border-top: none;
     }
   }
-  tr {
+  .table-row {
     font-size: 12px;
     line-height: 12px;
     span {
@@ -44,5 +44,14 @@
     &:hover {
       background-color: #f4f5f7 !important;
     }
+  }
+  .loading {
+    top: 40%;
+    left: 50%;
+  }
+
+  .no-result {
+    left: 36%;
+    margin-top: 1rem;
   }
 }
