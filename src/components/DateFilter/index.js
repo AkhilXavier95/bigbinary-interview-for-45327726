@@ -5,7 +5,6 @@ import styled from "styled-components";
 import ModalComponent from "components/Modal";
 import arrow from "assets/arrow.png";
 import calendar from "assets/calendar.png";
-import { defaultRanges } from "utils/helper";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -59,7 +58,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const DateFilter = ({ selected, setSelected }) => {
+const DateFilter = ({ selected, setSelected, defaultRanges }) => {
   const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);

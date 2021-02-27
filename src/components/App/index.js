@@ -121,6 +121,7 @@ function App({ history, match }) {
             <DateFilter
               selected={selectedDate}
               setSelected={onselectDateFilter}
+              defaultRanges={defaultRanges}
             />
             <FilterComponent
               options={filterOptions}

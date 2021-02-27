@@ -13,9 +13,7 @@ const ModalComponent = ({ header, modalBody, className, ...props }) => {
     >
       {header && (
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter">{header}</Modal.Title>
         </Modal.Header>
       )}
       <Modal.Body>{modalBody}</Modal.Body>
