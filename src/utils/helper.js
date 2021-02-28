@@ -109,3 +109,8 @@ export const getUrl = ({ pageNumber, filter, date }) => {
     "yyyy-MM-dd"
   )}/${format(date.value[1], "yyyy-MM-dd")}/${pageNumber}`;
 };
+
+export const getStatus = (upcoming, launchSuccess) => {
+  const status = upcoming ? "upcoming" : launchSuccess ? "success" : "failed";
+  return <span className={`round-span ${status}`}>{status}</span>;
+};
