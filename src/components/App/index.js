@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { withRouter } from "react-router";
+import format from "date-fns/format";
 
 import ModalComponent from "components/Modal";
 import Header from "components/Header";
@@ -215,7 +216,9 @@ function App({ history, match }) {
           </div>
           <div className="details-item d-flex">
             <span>Launch Date</span>
-            <span>{showModal.launch_date_local}</span>
+            <span>
+              {format(showModal.launch_date_local, "dd MMMM yyyy HH:mm")}
+            </span>
           </div>
           <div className="details-item d-flex">
             <span>Payload Type</span>
