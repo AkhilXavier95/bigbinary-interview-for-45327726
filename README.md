@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# SpaceX Dashboard
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -27,44 +27,72 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `yarn eject`
+### Absolute Import
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This application support importing modules using absolute paths.\
+To import a module located at src/components/Button.js, you can import the module like so:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+import Button from "components/Button";
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### DateFilter
 
-## Learn More
+Date filter component takes in default Ranges , selected filter value, and a function to set the selected value as props
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```js
+import DateFilter from "components/DateFilter";
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<DateFilter
+  selected={selectedDate}
+  setSelected={onSelectDateFilter}
+  defaultRanges={defaultRanges}
+/>;
+```
 
-### Code Splitting
+### DateFilter
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Date filter component takes in options to select from , selected filter value, and a function to set the selected value as props
 
-### Analyzing the Bundle Size
+```js
+import FilterComponent from "components/FilterComponent";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<FilterComponent
+  options={filterOptions}
+  selected={selectedFilter}
+  setSelected={onSelectFilter}
+/>;
+```
 
-### Making a Progressive Web App
+### LoadingComponent
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```js
+import LoadingComponent from "components/LoadingComponent";
 
-### Advanced Configuration
+<LoadingComponent />;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### LoadingComponent
 
-### Deployment
+```js
+import PaginationComponent from "components/PaginationComponent";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<PaginationComponent
+  activePage={activePage}
+  countPerPage={12}
+  totalCount={totalCount}
+  onChange={onPageChange}
+/>;
+```
 
-### `yarn build` fails to minify
+### TableComponent
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```js
+import TableComponent from "components/TableComponent";
+
+<TableComponent tableData={tableData} loading={tableLoading} />;
+```

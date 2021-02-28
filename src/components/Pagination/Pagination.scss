@@ -1,0 +1,18 @@
+.pagination {
+  .page-item {
+    .page-link {
+      font-size: 12px;
+      color: #4b5563;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    &.active {
+      .page-link {
+        color: #4b5563;
+        background-color: #e9ecef;
+        border-color: #e9ecef;
+      }
+    }
+  }
+}
