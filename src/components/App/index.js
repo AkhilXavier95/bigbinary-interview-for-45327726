@@ -32,7 +32,8 @@ function App({ history, match }) {
   const [selectedFilter, setSelectedFilter] = useState(filterOptions[0]);
   const [selectedDate, setSelectedDate] = useState(defaultRanges[3]);
   const [tableLoading, setTableLoading] = useState(false);
-  const [showModal, setShowModal] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [rowContent, setRowContent] = useState(null);
 
   const getLaunchData = useCallback(
     async (offSet = 0) => {
@@ -122,129 +123,129 @@ function App({ history, match }) {
   };
 
   const modalHeader = () => (
-    <>
-      {showModal && (
-        <div className="d-flex">
-          <div className="d-flex flex-column">
-            <span className="title">{showModal.mission_name}</span>
-            <span className="rocket-name">{showModal.rocket.rocket_name}</span>
-            <div className="ml-1 link-button-container">
-              <span className="mr-2">
-                <a
-                  href={showModal.links.article_link}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <img src={nasaImg} alt="" />
-                </a>
-              </span>
-              <span className="mr-2">
-                <a
-                  href={showModal.links.wikipedia}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <img src={wikiImg} alt="" />
-                </a>
-              </span>
-              <span className="mr-2">
-                <a
-                  href={showModal.links.video_link}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <img src={youTubeImg} alt="" />
-                </a>
-              </span>
-            </div>
-          </div>
-          <span className="ml-3 ">
-            {getStatus(showModal.upcoming, showModal.launch_success)}
+    <div className="d-flex">
+      <div className="d-flex flex-column">
+        <span className="title">{rowContent && rowContent.mission_name}</span>
+        <span className="rocket-name">
+          {rowContent && rowContent.rocket.rocket_name}
+        </span>
+        <div className="ml-1 link-button-container">
+          <span className="mr-2">
+            <a
+              href={rowContent && rowContent.links.article_link}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img src={nasaImg} alt="" />
+            </a>
+          </span>
+          <span className="mr-2">
+            <a
+              href={rowContent && rowContent.links.wikipedia}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img src={wikiImg} alt="" />
+            </a>
+          </span>
+          <span className="mr-2">
+            <a
+              href={rowContent && rowContent.links.video_link}
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <img src={youTubeImg} alt="" />
+            </a>
           </span>
         </div>
-      )}
-    </>
+      </div>
+      <span className="ml-3 ">
+        {rowContent &&
+          getStatus(rowContent.upcoming, rowContent.launch_success)}
+      </span>
+    </div>
   );
 
   const modalBody = () => (
     <>
-      {showModal && (
-        <>
-          <div>
-            <p className="details">
-              {showModal.details}{" "}
-              <a
-                href={showModal.links.wikipedia}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                Wikipedia
-              </a>
-            </p>
-          </div>
-          <div className="details-item d-flex">
-            <span>Flight Number</span>
-            <span>{showModal.flight_number}</span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Mission Name</span>
-            <span>{showModal.mission_name}</span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Rocket Type</span>
-            <span>{showModal.rocket.rocket_type}</span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Rocket Name</span>
-            <span>{showModal.rocket.rocket_name}</span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Manufacture</span>
-            <span>
-              {showModal.rocket.second_stage.payloads
-                .map((el) => el.manufacturer)
-                .join(", ")}
-            </span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Nationality</span>
-            <span>
-              {showModal.rocket.second_stage.payloads
-                .map((el) => el.nationality)
-                .join(", ")}
-            </span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Launch Date</span>
-            <span>
-              {format(
-                new Date(showModal.launch_date_local),
-                "dd MMMM yyyy HH:mm"
-              )}
-            </span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Payload Type</span>
-            <span>
-              {showModal.rocket.second_stage.payloads
-                .map((el) => el.payload_type)
-                .join(", ")}
-            </span>
-          </div>
-          <div className="details-item d-flex">
-            <span>Orbit</span>
-            <span>
-              {showModal.rocket.second_stage.payloads
-                .map((el) => el.orbit)
-                .join(", ")}
-            </span>
-          </div>
-          <div className="details-item d-flex no-border">
-            <span>Launch Site</span>
-            <span>{showModal.launch_site.site_name}</span>
-          </div>
-        </>
-      )}
+      <div>
+        <p className="details">
+          {rowContent && rowContent.details}{" "}
+          <a
+            href={rowContent && rowContent.links.wikipedia}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Wikipedia
+          </a>
+        </p>
+      </div>
+      <div className="details-item d-flex">
+        <span>Flight Number</span>
+        <span>{rowContent && rowContent.flight_number}</span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Mission Name</span>
+        <span>{rowContent && rowContent.mission_name}</span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Rocket Type</span>
+        <span>{rowContent && rowContent.rocket.rocket_type}</span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Rocket Name</span>
+        <span>{rowContent && rowContent.rocket.rocket_name}</span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Manufacture</span>
+        <span>
+          {rowContent &&
+            rowContent.rocket.second_stage.payloads
+              .map((el) => el.manufacturer)
+              .join(", ")}
+        </span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Nationality</span>
+        <span>
+          {rowContent &&
+            rowContent.rocket.second_stage.payloads
+              .map((el) => el.nationality)
+              .join(", ")}
+        </span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Launch Date</span>
+        <span>
+          {rowContent &&
+            format(
+              new Date(rowContent.launch_date_local),
+              "dd MMMM yyyy HH:mm"
+            )}
+        </span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Payload Type</span>
+        <span>
+          {rowContent &&
+            rowContent.rocket.second_stage.payloads
+              .map((el) => el.payload_type)
+              .join(", ")}
+        </span>
+      </div>
+      <div className="details-item d-flex">
+        <span>Orbit</span>
+        <span>
+          {rowContent &&
+            rowContent.rocket.second_stage.payloads
+              .map((el) => el.orbit)
+              .join(", ")}
+        </span>
+      </div>
+      <div className="details-item d-flex no-border">
+        <span>Launch Site</span>
+        <span>{rowContent && rowContent.launch_site.site_name}</span>
+      </div>
     </>
   );
   return (
@@ -267,7 +268,10 @@ function App({ history, match }) {
           <TableComponent
             tableData={tableData}
             loading={tableLoading}
-            onRowClick={(item) => setShowModal(item)}
+            onRowClick={(item) => {
+              setRowContent(item);
+              setShowModal(true);
+            }}
           />
           <PaginationComponent
             activePage={activePage}
@@ -279,9 +283,9 @@ function App({ history, match }) {
       </div>
       <ModalComponent
         className="details-modal"
-        show={!!showModal}
+        show={showModal}
         header={modalHeader()}
-        onHide={() => setShowModal(null)}
+        onHide={() => setShowModal(false)}
         modalBody={modalBody()}
       />
     </div>
