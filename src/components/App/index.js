@@ -217,7 +217,10 @@ function App({ history, match }) {
           <div className="details-item d-flex">
             <span>Launch Date</span>
             <span>
-              {format(showModal.launch_date_local, "dd MMMM yyyy HH:mm")}
+              {format(
+                new Date(showModal.launch_date_local),
+                "dd MMMM yyyy HH:mm"
+              )}
             </span>
           </div>
           <div className="details-item d-flex">
