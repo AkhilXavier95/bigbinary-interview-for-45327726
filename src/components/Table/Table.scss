@@ -1,3 +1,9 @@
+.details-modal {
+  .modal-dialog {
+    max-width: 650px;
+  }
+}
+
 .table-component {
   border: 1px solid #e4e4e7;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -22,25 +28,7 @@
   .table-row {
     font-size: 12px;
     line-height: 12px;
-    span {
-      border-radius: 20px;
-      padding: 2px 10px;
-      font-weight: 500;
-      font-size: 12 px;
-      line-height: 14px;
-    }
-    .upcoming {
-      background: #fef3c7;
-      color: #92400f;
-    }
-    .failed {
-      background: #fde2e1;
-      color: #981b1c;
-    }
-    .success {
-      background: #def7ec;
-      color: #03543f;
-    }
+
     &:hover {
       background-color: #f4f5f7 !important;
     }
@@ -53,5 +41,8 @@
   .no-result {
     left: 36%;
     margin-top: 1rem;
+    &:hover {
+      background: none;
+    }
   }
 }
