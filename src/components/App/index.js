@@ -247,7 +247,6 @@ function App({ history, match }) {
       )}
     </>
   );
-  console.log(showModal);
   return (
     <div className="app">
       <Header />
