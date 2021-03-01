@@ -245,7 +245,7 @@ function App({ history, match }) {
       </div>
       <div className="details-item d-flex no-border">
         <span>Launch Site</span>
-        <span>{rowContent.launch_site.site_name}</span>
+        <span>{rowContent && rowContent.launch_site.site_name}</span>
       </div>
     </>
   );
