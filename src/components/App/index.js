@@ -76,6 +76,7 @@ function App({ history, match }) {
         label: params.dateFilter,
         value: [new Date(params.startDate), new Date(params.endDate)],
       });
+      setActivePage(params.page);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -244,10 +245,11 @@ function App({ history, match }) {
       </div>
       <div className="details-item d-flex no-border">
         <span>Launch Site</span>
-        <span>{rowContent && rowContent.launch_site.site_name}</span>
+        <span>{rowContent.launch_site.site_name}</span>
       </div>
     </>
   );
+
   return (
     <div className="app">
       <Header />
